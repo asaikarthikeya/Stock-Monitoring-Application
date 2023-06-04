@@ -8,6 +8,7 @@ import com.crazzyghost.stockmonitor.data.DatabaseManager
 import com.crazzyghost.stockmonitor.data.models.Company
 import com.crazzyghost.stockmonitor.data.models.WatchListItem
 import com.crazzyghost.stockmonitor.data.models.WatchListItem_
+import com.google.firebase.auth.FirebaseAuth
 import io.objectbox.Box
 import io.objectbox.kotlin.boxFor
 import javax.inject.Inject
@@ -15,13 +16,15 @@ import javax.inject.Inject
 class WatchListRepository @Inject constructor(database: DatabaseManager){
 
     private val box: Box<WatchListItem> = database.boxStore().boxFor()
-
+    private val auth: FirebaseAuth = FirebaseAuth.getInstance()
     fun count(): Long {
-      return box.count()
+        return box.query().equal(WatchListItem_.userId, getCurrentUserId()).build().count()
     }
 
     private fun find(company: Company) : WatchListItem? {
         return box.query()
+            .equal(WatchListItem_.userId, getCurrentUserId())
+            .and()
             .equal(WatchListItem_.name, company.name)
             .and()
             .equal(WatchListItem_.symbol, company.symbol)
@@ -43,6 +46,7 @@ class WatchListRepository @Inject constructor(database: DatabaseManager){
         }
         val item =  WatchListItem(
             name = company.name,
+            userId = getCurrentUserId(),
             symbol = company.symbol,
             previousClose = quote?.previousClose,
             open = quote?.open,
@@ -64,11 +68,17 @@ class WatchListRepository @Inject constructor(database: DatabaseManager){
 
     fun delete(item: WatchListItem) {
         box.query()
+            .equal(WatchListItem_.userId, getCurrentUserId())
+            .and()
             .equal(WatchListItem_.name, item.name)
             .and()
             .equal(WatchListItem_.symbol, item.symbol)
             .build()
             .remove()
+    }
+
+    private fun getCurrentUserId(): String {
+        return auth.currentUser?.uid ?: throw IllegalStateException("User not authenticated")
     }
 
     fun getQuote(

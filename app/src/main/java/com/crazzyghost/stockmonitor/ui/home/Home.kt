@@ -31,17 +31,18 @@ class Home : BaseMvpActivity<HomeContract.View>(), HomeContract.View {
     lateinit var viewManager: LinearLayoutManager
     lateinit var viewAnimator: RecyclerView.ItemAnimator
     private lateinit var auth: FirebaseAuth
-
+//    val  userid = auth.currentUser;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        auth = FirebaseAuth.getInstance()
         initUI()
     }
 
     override fun onResume() {
         super.onResume()
-        presenter.getWatchListItems()
         auth = FirebaseAuth.getInstance()
+        presenter.getWatchListItems(auth.currentUser?.uid)
     }
 
 
@@ -58,7 +59,7 @@ class Home : BaseMvpActivity<HomeContract.View>(), HomeContract.View {
             startActivity(intent)
         }
 
-        presenter.getWatchListItems()
+        presenter.getWatchListItems(auth.currentUser?.uid)
         viewAdapter = WatchListAdapter(listOf())
         viewManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         viewAnimator = DefaultItemAnimator()
@@ -104,14 +105,16 @@ class Home : BaseMvpActivity<HomeContract.View>(), HomeContract.View {
         ItemTouchHelper(handler).attachToRecyclerView(watchListRv)
     }
 
-    override fun onWatchListItems(items: List<WatchListItem>){
-        if(items.isNotEmpty()){
+    override fun onWatchListItems(items: List<WatchListItem>) {
+        val currentUser = auth.currentUser
+        val filteredItems = items.filter { it.userId == currentUser?.uid }
+        if (filteredItems.isNotEmpty()) {
             watchListRv.visibility = View.VISIBLE
             watchListTv.visibility = View.VISIBLE
             emptyWatchlistTv.visibility = View.GONE
-            viewAdapter.updateList(items)
+            viewAdapter.updateList(filteredItems,currentUser)
             viewAdapter.notifyDataSetChanged()
-        }else{
+        } else {
             emptyWatchlistTv.visibility = View.VISIBLE
         }
     }

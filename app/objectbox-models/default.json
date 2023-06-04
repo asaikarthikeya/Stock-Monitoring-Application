@@ -29,7 +29,7 @@
     },
     {
       "id": "2:1170991344858540834",
-      "lastPropertyId": "9:1778818965203034550",
+      "lastPropertyId": "10:2077877709261357242",
       "name": "WatchListItem",
       "properties": [
         {
@@ -83,6 +83,11 @@
           "name": "change",
           "type": 8,
           "flags": 2
+        },
+        {
+          "id": "10:2077877709261357242",
+          "name": "userId",
+          "type": 9
         }
       ],
       "relations": []

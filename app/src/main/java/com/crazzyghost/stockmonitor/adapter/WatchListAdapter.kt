@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.crazzyghost.stockmonitor.R
 import com.crazzyghost.stockmonitor.data.models.WatchListItem
+import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_view_stock.*
 import kotlinx.android.synthetic.main.activity_view_stock.view.*
 import kotlinx.android.synthetic.main.content_watch_list_item_card.view.*
@@ -46,15 +47,24 @@ class WatchListAdapter(private var watchListItems: List<WatchListItem>): Recycle
 
     }
 
-    fun updateList(list: List<WatchListItem>){
-        watchListItems = list
+    fun updateList(list: List<WatchListItem>, userId: FirebaseUser?) {
+        watchListItems = list.filter { it.userId == userId?.uid }
     }
+
 
     fun get(position: Int): WatchListItem = watchListItems[position]
 
     fun delete(position: Int) {
         (watchListItems as ArrayList).removeAt(position)
     }
+
+//    fun updateList(list: List<WatchListItem>, userId: FirebaseUser?) {
+//
+//    }
+
+//    fun updateList(list: List<WatchListItem>) {
+//
+//    }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view)
 

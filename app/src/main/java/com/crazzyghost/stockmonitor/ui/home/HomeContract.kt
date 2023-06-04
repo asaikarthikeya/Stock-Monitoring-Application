@@ -8,7 +8,7 @@ interface HomeContract {
 
     interface Presenter : BasePresenter<View> {
 
-        fun getWatchListItems()
+        fun getWatchListItems(userId: String?)
         fun deleteItem(item: WatchListItem, adapterPosition: Int)
     }
 

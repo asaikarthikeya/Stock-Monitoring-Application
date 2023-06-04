@@ -23,7 +23,7 @@ class HomePresenter @Inject constructor(
         view = null
     }
 
-    override fun getWatchListItems() {
+    override fun getWatchListItems(userId: String?) {
         GlobalScope.launch(Dispatchers.IO) {
             val list = repository.all()
             launch(Dispatchers.Main){
