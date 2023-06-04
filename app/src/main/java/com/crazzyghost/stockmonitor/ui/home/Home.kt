@@ -11,12 +11,14 @@ import com.crazzyghost.stockmonitor.R
 import com.crazzyghost.stockmonitor.adapter.WatchListAdapter
 import com.crazzyghost.stockmonitor.data.models.WatchListItem
 import com.crazzyghost.stockmonitor.mvp.BaseMvpActivity
+import com.crazzyghost.stockmonitor.ui.authentication.SignInActivity
 import com.crazzyghost.stockmonitor.ui.search.Search
 import com.crazzyghost.stockmonitor.ui.viewstock.ViewStock
 import com.crazzyghost.stockmonitor.util.ClickListener
 import com.crazzyghost.stockmonitor.util.Constants
 import com.crazzyghost.stockmonitor.util.ItemTouchListener
 import com.crazzyghost.stockmonitor.util.SwipeToDeleteCallback
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_home.*
 import javax.inject.Inject
 
@@ -28,6 +30,8 @@ class Home : BaseMvpActivity<HomeContract.View>(), HomeContract.View {
     lateinit var viewAdapter: WatchListAdapter
     lateinit var viewManager: LinearLayoutManager
     lateinit var viewAnimator: RecyclerView.ItemAnimator
+    private lateinit var auth: FirebaseAuth
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +41,7 @@ class Home : BaseMvpActivity<HomeContract.View>(), HomeContract.View {
     override fun onResume() {
         super.onResume()
         presenter.getWatchListItems()
+        auth = FirebaseAuth.getInstance()
     }
 
 
@@ -81,6 +86,13 @@ class Home : BaseMvpActivity<HomeContract.View>(), HomeContract.View {
                     override fun onLongClick(view: View?, position: Int) = Unit
                 })
         )
+
+        logoutBtn.setOnClickListener {
+            auth.signOut()
+            val intent = Intent(this@Home, SignInActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
 
         val handler = object : SwipeToDeleteCallback(this) {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {

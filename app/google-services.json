@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "886416867608",
+    "project_id": "stockmonitor-userauth",
+    "storage_bucket": "stockmonitor-userauth.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:886416867608:android:6d9ae5182d2d3044aa1e6d",
+        "android_client_info": {
+          "package_name": "com.crazzyghost.stockmonitor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "886416867608-b0mmesgfdt0kfcpofkt29njpvtc5fd13.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD64TYe1u55W2rPrCEeMgFX_J1poVKAli0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "886416867608-b0mmesgfdt0kfcpofkt29njpvtc5fd13.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
