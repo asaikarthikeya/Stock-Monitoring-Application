@@ -1,22 +1,30 @@
-# Stock Monitor
-Sample Android app using the [alphavantage-java] wrapper. Allows you to monitor stock information and quotes of Nasdaq listed companies.
+# Stock Monitoring Application.
+- Stock Monitoring application that helps you to search and track the NASDAQ listed companies.
+ 
+- The Stock information is fetched from Alpha Vantage API and is presented in a graphical way.
+ 
+- ObjectBox database is used to store the watchlists and Fire base is used for User Authentication.
 
-[alphavantage-java]: https://github.com/crazzyghost/alphavantage-java
-[dribbble shot]: https://dribbble.com/shots/13984810-Stock-Monitor
+- Watchlists are User specific, each user has a different watchlist. 
 
-<p>
-<img src="https://www.dropbox.com/s/2e6nw1zpake0n7i/Screenshot_20201117-222403_Stock_Monitor.jpg?raw=1" width="198"/>&nbsp;&nbsp;&nbsp;<img src="https://www.dropbox.com/s/33wqkpszu7g2d44/Screenshot_20201117-222418_Stock_Monitor.jpg?raw=1" width="198"/>&nbsp;&nbsp;&nbsp;<img src="https://www.dropbox.com/s/nfzf22cis8ewlc4/Screenshot_20201117-222430_Stock_Monitor.jpg?raw=1" width="198"/>
-</p>
+- Followed Model-View-Presenter (MVP) architecture and other good practices.
+
+
+## Screenshots
+
+| Stock Representation | Stock Search | User Watchlist | User Authentication |
+| :------------------: | :----------: | :------------: | :-----------------: |
+| <img src="https://github.com/asaikarthikeya/stockmonitor-androidapp/assets/70392921/b55867e7-8673-435a-a643-ff37f10b41b1" alt="Stock Representation" style="width:200px; height:400px;" /> | <img src="https://github.com/asaikarthikeya/stockmonitor-androidapp/assets/70392921/b47e6893-3ea9-48f2-ac48-dbe809d3f8e4" alt="Stock Search" style="width:200px; height:400px;" /> | <img src="https://github.com/asaikarthikeya/stockmonitor-androidapp/assets/70392921/ab26d89c-ad8b-4725-9a90-3b06fff05cf0" alt="User Watchlist" style="width:200px; height:400px;" /> | <img src="https://github.com/asaikarthikeya/stockmonitor-androidapp/assets/70392921/f1233d76-7f49-4448-888b-3f02a5b884d3" alt="User Authentication" style="width:200px; height:400px;" /> |
+
+## App Flow 
+
+
+
+https://github.com/asaikarthikeya/stockmonitor-androidapp/assets/70392921/c9608f19-9040-47bf-87af-e8fbf01764f6
+
 
 ## Setup
-- Obtain an API key from [here](https://www.alphavantage.co/support/#api-key).
-- Clone/download the repo
-- Import the project into Android Studio
-- Change the key in [App.kt](https://github.com/crazzyghost/stockmonitor/blob/master/app/src/main/java/com/crazzyghost/stockmonitor/app/App.kt) with your API key
+- Clone/download the repo into the Android Studio.
+- Obtain an API key from [here](https://www.alphavantage.co/support/#api-key). And place it in  [App.kt](https://github.com/crazzyghost/stockmonitor/blob/master/app/src/main/java/com/crazzyghost/stockmonitor/app/App.kt)
 - Run the project
 
-
-UI design for the project is from this  [dribble shot].
-
-[alphavantage-java]: https://github.com/crazzyghost/alphavantage-java
-[dribble shot]: https://dribbble.com/shots/13984810-Stock-Monitor
